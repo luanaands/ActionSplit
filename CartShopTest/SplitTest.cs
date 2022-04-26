@@ -71,8 +71,8 @@ namespace CartShopTest
 
             //assert 
             Assert.Equal(33, result["luanaands@gmail.com"]);
-            Assert.Equal(33, result["teste@teste.com"]);
-            Assert.Equal(34, result["teste@teste.com.br"]);
+            Assert.Equal(33.50M, result["teste@teste.com"]);
+            Assert.Equal(33.50M, result["teste@teste.com.br"]);
             Assert.Equal(100, result["teste@teste.com.br"] + result["luanaands@gmail.com"] + result["teste@teste.com"]);
         }
 
