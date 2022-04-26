@@ -34,24 +34,33 @@
         {
             Dictionary<string, decimal> result = new Dictionary<string, decimal>();
             int quantity = emails.Count;
-            int indexLast = quantity - 1;
+            int count = emails.Count;
             var emailsArray = emails.ToArray();
             decimal part = amount/quantity; 
             decimal valueRound = Math.Round(part);
             decimal rest = amount - (valueRound * quantity);
-            decimal valueLast = valueRound + rest;
-
+            decimal restDiv = rest;
+            int quantityStop = 1;
+            while (count > 0)
+            {
+                var valor = (rest * 100) % count;
+                if ((rest*100) % count == 0)
+                {
+                    restDiv = rest/count;
+                    quantityStop = count;
+                    break;
+                }
+                count--;
+            }
             for (int i = 0; i < quantity; i++)
             {
                 var email = emailsArray[i];
-                if (i != indexLast)
-                {
-                    result[email] = valueRound;
-                }
-                else
-                {
-                    result[email] = valueLast;
-                }
+                result[email] = valueRound;
+            }
+            for (int i = (quantityStop - 1); i < quantity; i++)
+            {
+                var email = emailsArray[i];
+                result[email] = result[email] + restDiv;
             }
             return result;
         }
